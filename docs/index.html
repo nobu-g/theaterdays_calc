@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>テストだよ</title>
+
+</head>
+
+<body>
+    <h2>
+        センター
+    </h2>
+    <form name = "center">
+        <p>タイプ: <select name="type" onchange="setType()">
+            <option value="">タイプ選択</option>
+            <option value="">Princess</option>
+            <option value="">Fairy</option>
+            <option value="">Angel</option>
+        </select></p>
+        <p>ボーカル: <input name="vocal" required="required" min="0" type="number"></p>
+        <p>ダンス: <input name="dance" required="required" min="0" type="number"></p>
+        <p>ビジュアル: <input name="visual" required="required" min="0" type="number"></p>
+    </form>
+
+    <input type="button" value="ファイル読み込み"
+           onClick="loadFile('theaterdays.bitballoon.com/自分REST@RT.bms')" />　
+    <input type="button" value="クリア"
+           onClick="document.getElementById('text1').value='';" />
+    <br>
+    <textarea name="text1" cols="40" rows="20"></textarea>
+
+<script>
+
+
+// アイドルのタイプ(属性)が変更されたとき呼ばれる
+function setType() {
+    alert("hello");
+}
+
+// サーバー上のbmsファイルを読み込む
+function loadFile(fileName){
+   httpObj = new XMLHttpRequest();
+   httpObj.open('GET',fileName+"?"+(new Date()).getTime(),true);
+   // ?以降はキャッシュされたファイルではなく、毎回読み込むためのもの
+   httpObj.send(null);
+   httpObj.onreadystatechange = function(){
+      if ( (httpObj.readyState == 4) && (httpObj.status == 200) ){
+         document.getElementById("text1").value=httpObj.responseText;
+      }
+   }
+
+</script>
+</body>
+</html>
