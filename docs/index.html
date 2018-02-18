@@ -23,7 +23,7 @@
     </form>
 
     <input type="button" value="ファイル読み込み"
-           onClick="loadFile('theaterdays.bitballoon.com/自分REST@RT.bms')" />　
+           onClick="loadFile('https://nobu-g.github.io/theaterdays_calc/自分REST@RT.bms')" />　
     <input type="button" value="クリア"
            onClick="document.getElementById('text1').value='';" />
     <br>
@@ -39,15 +39,18 @@ function setType() {
 
 // サーバー上のbmsファイルを読み込む
 function loadFile(fileName){
-   httpObj = new XMLHttpRequest();
-   httpObj.open('GET',fileName+"?"+(new Date()).getTime(),true);
-   // ?以降はキャッシュされたファイルではなく、毎回読み込むためのもの
-   httpObj.send(null);
-   httpObj.onreadystatechange = function(){
-      if ( (httpObj.readyState == 4) && (httpObj.status == 200) ){
-         document.getElementById("text1").value=httpObj.responseText;
-      }
-   }
+    httpObj = new XMLHttpRequest();
+    httpObj.open('GET',fileName+"?"+(new Date()).getTime(),true);
+    // ?以降はキャッシュされたファイルではなく、毎回読み込むためのもの
+    httpObj.send(null);
+    httpObj.onreadystatechange = function(){
+        if ( (httpObj.readyState == 4) && (httpObj.status == 200) ){
+            document.getElementById("text1").value=httpObj.responseText;
+        } else {
+            document.getElementById("text1").value="読み込み失敗";
+        }
+    }
+}
 
 </script>
 </body>
