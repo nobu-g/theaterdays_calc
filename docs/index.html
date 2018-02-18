@@ -1,36 +1,68 @@
-
+<!DOCTYPE html>
 <html>
 <head>
-		<meta http-equiv="content-type" content="text/html;charset=shift_jis">
-		<title>サーバー上のテキストファイルを読み込みページ上に表示する</title>
-<script type="text/javascript" src="xmlhttp.js"></script>
-<script type="text/javascript"><!--
-function loadTextFile(fName)
+
+<title>テストだよ</title>
+
+</head>
+
+<body>
+    <h2>
+        センター
+    </h2>
+    <form name = "center">
+        <p>タイプ: <select name="type" onchange="setType()">
+            <option value="">タイプ選択</option>
+            <option value="">Princess</option>
+            <option value="">Fairy</option>
+            <option value="">Angel</option>
+        </select></p>
+        <p>ボーカル: <input name="vocal" required="required" min="0" type="number"></p>
+        <p>ダンス: <input name="dance" required="required" min="0" type="number"></p>
+        <p>ビジュアル: <input name="visual" required="required" min="0" type="number"></p>
+    </form>
+
+    <input type="button" value="ファイル読み込み"
+           onClick="loadTextFile('https://nobu-g.github.io/theaterdays_calc/Base.cpp')" />　
+    <input type="button" value="クリア"
+           onClick="document.getElementById('text1').value='';" />
+    <br>
+    <textarea name="text1" cols="40" rows="20"></textarea>
+
+
+
+
+
+<script>
+
+// アイドルのタイプ(属性)が変更されたとき呼ばれる
+function setType() {
+    alert("hello");
+}
+
+// サーバー上のbmsファイルを読み込む
+function loadTextFile(fileName)
 {
 	httpObj = createXMLHttpRequest(displayData);
 	if (httpObj)
 	{
-		httpObj.open("GET",fName,true);
+		httpObj.open("GET", fileName, true);
 		httpObj.send(null);
 	}
 }
+// 読み込み完了時に呼ばれる？
 function displayData()
 {
 	if ((httpObj.readyState == 4) && (httpObj.status == 200))
 	{
-		document.getElementById("resultData").innerText = httpObj.responseText;
+		document.getElementById("text1").value = httpObj.responseText;
 	}else{
-		document.getElementById("resultData").innerText = "Loading...";
+		document.getElementById("text1").value = "Loading...";
 	}
 }
 
-// --></script>
-</head>
-<body>
-<h1>サーバー上のテキストファイルを読み込みページ上に表示する</h1>
-<form name="ajaxForm">
-<input type="button" value="data.txtファイル読み込み" onClick="loadTextFile('data.txt')"><br>
-</form>
-<div id="resultData"></div>
+
+</script>
+<script type="text/javascript" src="xmlhttp.js"></script>
 </body>
 </html>
