@@ -1,4 +1,4 @@
-// HTTP’ÊM—pA‹¤’ÊŠÖ”
+// HTTPé€šä¿¡ç”¨ã€å…±é€šé–¢æ•°
 function createXMLHttpRequest(cbFunc)
 {
 	var XMLhttpObject = null;
