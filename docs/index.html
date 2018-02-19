@@ -5,40 +5,6 @@
 <title>テストだよ</title>
 
 
-<script type="text/javascript" src="xmlhttp.js"></script>
-<script>
-
-// アイドルのタイプ(属性)が変更されたとき呼ばれる
-function setType() {
-    alert("updated");
-}
-
-// サーバー上のbmsファイルを読み込む
-function loadTextFile(fileName)
-{
-	httpObj = createXMLHttpRequest(displayData);
-	if (httpObj)
-	{
-		httpObj.open("GET", fileName, true);
-		httpObj.send(null);
-	}
-}
-// 読み込み完了時に呼ばれる？
-function displayData()
-{
-	if ((httpObj.readyState == 4) && (httpObj.status == 200))
-	{
-		document.getElementById("text1").value = httpObj.responseText;
-	}else{
-		document.getElementById("text1").value = "Loading...";
-	}
-}
-
-
-</script>
-
-
-
 </head>
 
 <body>
@@ -59,13 +25,47 @@ function displayData()
 
 <form>
     <input type="button" value="ファイル読み込み" onClick="loadTextFile('data.txt')">　
-    <input type="button" value="クリア" onClick="document.getElementById('text1').innerText='';">
+    <input type="button" value="クリア" onClick="document.getElementById('text1').innerText=''">
     <br>
-    <textarea name="text1" cols="40" rows="20"></textarea>
+    <div id="text1"></div>
 </form>
 
 
 
+<script type="text/javascript" src="xmlhttp.js"></script>
+<script>
+
+// アイドルのタイプ(属性)が変更されたとき呼ばれる
+function setType() {
+    alert("updated2");
+    document.getElementById("text1").innerText = "konnichiwa";
+}
+
+// サーバー上のbmsファイルを読み込む
+function loadTextFile(fileName)
+{
+	httpObj = createXMLHttpRequest(displayData);
+	if (httpObj)
+	{
+		httpObj.open("GET", fileName, true);
+        alert("in loadTextData after open");
+		httpObj.send(null);
+	}
+}
+// 読み込み完了時に呼ばれる？
+function displayData()
+{
+	if ((httpObj.readyState == 4) && (httpObj.status == 200))
+	{
+		document.getElementById("text1").innerText = httpObj.responseText;
+        alert("in displayData");
+	}else{
+		document.getElementById("text1").innerText = "Loading...";
+	}
+}
+
+
+</script>
 
 </body>
 </html>
