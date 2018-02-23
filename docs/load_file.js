@@ -10,6 +10,7 @@ class LoadTextFile {
             alert("in loadTextData after open");
             httpObj.send(null);
         }
+        alert("in constructor");
     }
 
 }
