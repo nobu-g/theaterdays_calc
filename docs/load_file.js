@@ -6,7 +6,7 @@ class LoadTextFile {
         let httpObj = this.createXMLHttpRequest();
         if (httpObj)
         {
-            alert("in loadTextData before open");
+            // alert("in loadTextData before open");
             httpObj.open("GET", fileName, true);
             httpObj.send(null);
         }
@@ -39,7 +39,7 @@ class LoadTextFile {
         if ((this.httpObj.readyState == 4) && (this.httpObj.status == 200))
         {
             document.getElementById("text1").innerText = this.httpObj.responseText;
-            this.bmsText =
+            this.bmsText = this.httpObj.responseText
             alert("loaded");
         }else{
             document.getElementById("text1").innerText = "Loading...";
@@ -60,6 +60,6 @@ class LoadTextFile {
 function calc() {
     const loadTextFile = new LoadTextFile("data.txt");
 
-    alert("in calc");
+    // alert("in calc");
     alert(loadTextFile.get())
 }
