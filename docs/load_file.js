@@ -37,7 +37,6 @@ function displayData()
 	if ((httpObj.readyState == 4) && (httpObj.status == 200))
 	{
 		document.getElementById("text1").innerText = httpObj.responseText;
-        alert("in displayData");
 	}else{
 		document.getElementById("text1").innerText = "Loading...";
 	}
