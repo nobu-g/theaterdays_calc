@@ -3,7 +3,7 @@ class LoadTextFile {
     let hasLoaded = false;
     let bmsText;
     constructor(fileName) {
-        httpObj = createXMLHttpRequest(displayData);
+        this.httpObj = createXMLHttpRequest(displayData);
         if (httpObj)
         {
             httpObj.open("GET", fileName, true);
