@@ -29,23 +29,12 @@ class LoadTextFile {
                 }
             }
         }
-        if (XMLhttpObject) XMLhttpObject.onreadystatechange = this.displayData;
+        if (XMLhttpObject) XMLhttpObject.onreadystatechange = displayData;
+
+
         return XMLhttpObject;
     }
 
-    // XMLHttpRequest のステータスが変わるごとに複数回呼ばれる
-    displayData()
-    {
-        if ((this.httpObj.readyState == 4) && (this.httpObj.status == 200))
-        {
-            document.getElementById("text1").innerText = this.httpObj.responseText;
-            this.bmsText = this.httpObj.responseText
-            alert("loaded");
-        }else{
-            document.getElementById("text1").innerText = "Loading...";
-        }
-        alert("hasLoaded");
-    }
 
     get()
     {
@@ -53,6 +42,19 @@ class LoadTextFile {
     }
 }
 
+// XMLHttpRequest のステータスが変わるごとに複数回呼ばれる
+function displayData()
+{
+    if ((this.httpObj.readyState == 4) && (this.httpObj.status == 200))
+    {
+        document.getElementById("text1").innerText = this.httpObj.responseText;
+        this.bmsText = this.httpObj.responseText
+        alert("loaded");
+    }else{
+        document.getElementById("text1").innerText = "Loading...";
+    }
+    alert("hasLoaded");
+}
 
 
 
