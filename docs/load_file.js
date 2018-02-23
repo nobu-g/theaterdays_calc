@@ -29,7 +29,10 @@ class LoadTextFile {
                 }
             }
         }
-        if (XMLhttpObject) XMLhttpObject.onreadystatechange = displayData;
+        if (XMLhttpObject)
+            XMLhttpObject.onreadystatechange = displayData;
+        else
+            alert("objectnill");
 
 
         return XMLhttpObject;
