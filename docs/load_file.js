@@ -61,5 +61,5 @@ function calc() {
     const loadTextFile = new LoadTextFile("data.txt");
 
     alert("in calc");
-    loadTextFile.get()
+    alert(loadTextFile.get())
 }
