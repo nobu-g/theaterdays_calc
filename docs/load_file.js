@@ -68,8 +68,8 @@ class LoadTextFile {
 
 
 function calc() {
-    const loadTextFile = new LoadTextFile("data.txt");
-
+    const loadTextFile = new LoadTextFile('data.txt');
+    alert("before get");
     // alert("in calc");
     alert(loadTextFile.get())
 }
