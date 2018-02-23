@@ -58,7 +58,7 @@ class LoadTextFile {
 
     get()
     {
-        return this.httpObj.responseText;
+        return this.httpObj.readyState;
     }
 }
 
