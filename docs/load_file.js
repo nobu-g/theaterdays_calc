@@ -1,51 +1,55 @@
 // サーバー上のbmsファイルを読み込む
 class LoadTextFile {
     constructor(fileName) {
-        let httpObj = createXMLHttpRequest(displayData);
+        let hasLoaded = false;
+        let httpObj = this.createXMLHttpRequest(this.displayData);
         if (httpObj)
         {
+            alert("in loadTextData before open");
             httpObj.open("GET", fileName, true);
-            alert("in loadTextData after open");
             httpObj.send(null);
         }
-        alert("in constructor");
     }
 
-}
-
-// HTTP通信用
-function createXMLHttpRequest(cbFunc)
-{
-    var XMLhttpObject = null;
-    try{
-        XMLhttpObject = new XMLHttpRequest();
-    }catch(e){
+    // HTTP通信用
+    createXMLHttpRequest(cbFunc)
+    {
+        var XMLhttpObject = null;
         try{
-            XMLhttpObject = new ActiveXObject("Msxml2.XMLHTTP");
+            XMLhttpObject = new XMLHttpRequest();
         }catch(e){
             try{
-                XMLhttpObject = new ActiveXObject("Microsoft.XMLHTTP");
+                XMLhttpObject = new ActiveXObject("Msxml2.XMLHTTP");
             }catch(e){
-                return null;
+                try{
+                    XMLhttpObject = new ActiveXObject("Microsoft.XMLHTTP");
+                }catch(e){
+                    return null;
+                }
             }
         }
+        if (XMLhttpObject) XMLhttpObject.onreadystatechange = cbFunc;
+        return XMLhttpObject;
     }
-    if (XMLhttpObject) XMLhttpObject.onreadystatechange = cbFunc;
-    return XMLhttpObject;
-}
 
-// XMLHttpRequest のステータスが変わるごとに複数回呼ばれる
-function displayData()
-{
-    if ((httpObj.readyState == 4) && (httpObj.status == 200))
+    // XMLHttpRequest のステータスが変わるごとに複数回呼ばれる
+    displayData()
     {
-        document.getElementById("text1").innerText = httpObj.responseText;
-
-    }else{
-        document.getElementById("text1").innerText = "Loading...";
+        if ((this.httpObj.readyState == 4) && (this.httpObj.status == 200))
+        {
+            document.getElementById("text1").innerText = this.httpObj.responseText;
+            this.hasLoaded = true;
+            alert("loaded");
+        }else{
+            document.getElementById("text1").innerText = "Loading...";
+        }
+        alert("hasLoaded");
     }
-    alert("hasLoaded");
+
 }
+
+
+
 
 
 function calc() {
