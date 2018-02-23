@@ -24,7 +24,7 @@
     </form>
 
 <form>
-    <input type="button" value="ファイル読み込み" onClick="loadTextFile('data.txt')">　
+    <input type="button" value="ファイル読み込み" onClick="calc()">　
     <input type="button" value="クリア" onClick="document.getElementById('text1').innerText=''">
     <br>
     <div id="text1"></div>
@@ -39,6 +39,10 @@
 function setType() {
     alert("updated2");
     document.getElementById("text1").innerText = "konnichiwa";
+}
+
+function calc() {
+    let loadTextFile = new LoadTextFile("data.txt");
 }
 
 
