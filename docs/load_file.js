@@ -6,7 +6,7 @@ class LoadTextFile {
         let httpObj = this.createXMLHttpRequest();
         if (httpObj)
         {
-            // alert("in loadTextData before open");
+            alert("in loadTextData before open");
             httpObj.open("GET", fileName, true);
             httpObj.send(null);
         }
@@ -25,6 +25,7 @@ class LoadTextFile {
                 try{
                     XMLhttpObject = new ActiveXObject("Microsoft.XMLHTTP");
                 }catch(e){
+                    alert("objectnilllllllllllll");
                     return null;
                 }
             }
