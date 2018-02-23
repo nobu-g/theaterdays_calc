@@ -1,9 +1,7 @@
 // サーバー上のbmsファイルを読み込む
 class LoadTextFile {
-    let hasLoaded = false;
-    let bmsText;
     constructor(fileName) {
-        this.httpObj = createXMLHttpRequest(displayData);
+        let httpObj = createXMLHttpRequest(displayData);
         if (httpObj)
         {
             httpObj.open("GET", fileName, true);
@@ -47,4 +45,11 @@ function displayData()
         document.getElementById("text1").innerText = "Loading...";
     }
     alert("hasLoaded");
+}
+
+
+function calc() {
+    const loadTextFile = new LoadTextFile("data.txt");
+
+    alert("in calc");
 }

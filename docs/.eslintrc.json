@@ -1,0 +1,17 @@
+{
+    "extends": ["eslint:recommended"],
+    "plugins": [],
+    "parserOptions": {},
+    "env": {
+        "es6": true,
+        "browser": true
+    },
+    "globals": {
+        "$": false,
+        "ActiveXObject": false
+    },
+    "rules": {
+        "no-extra-semi": "warn",
+        "no-undef": "warn"
+    }
+}
