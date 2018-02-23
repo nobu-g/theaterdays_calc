@@ -3,12 +3,12 @@ class LoadTextFile {
     constructor(fileName) {
         this.bmsText = "";
         this.hasLoaded = false;
-        let httpObj = this.createXMLHttpRequest();
-        if (httpObj)
+        this.httpObj = this.createXMLHttpRequest();
+        if (this.httpObj)
         {
             alert("in loadTextData before open");
-            httpObj.open("GET", fileName, true);
-            httpObj.send(null);
+            this.httpObj.open("GET", fileName, true);
+            this.httpObj.send(null);
         }
     }
 
@@ -31,7 +31,7 @@ class LoadTextFile {
             }
         }
         if (XMLhttpObject) {
-            XMLhttpObject.onreadystatechange = displayData;
+            XMLhttpObject.onreadystatechange = this.displayData;
             alert("objectexists");
         }
         else
@@ -41,6 +41,20 @@ class LoadTextFile {
         return XMLhttpObject;
     }
 
+    // XMLHttpRequest のステータスが変わるごとに複数回呼ばれる
+    displayData()
+    {
+        if ((this.httpObj.readyState == 4) && (this.httpObj.status == 200))
+        {
+            document.getElementById("text1").innerText = this.httpObj.responseText;
+            this.bmsText = this.httpObj.responseText
+            alert("loaded");
+        }else{
+            document.getElementById("text1").innerText = "Loading...";
+        }
+        alert("hasLoaded");
+    }
+
 
     get()
     {
@@ -48,19 +62,7 @@ class LoadTextFile {
     }
 }
 
-// XMLHttpRequest のステータスが変わるごとに複数回呼ばれる
-function displayData()
-{
-    if ((this.httpObj.readyState == 4) && (this.httpObj.status == 200))
-    {
-        document.getElementById("text1").innerText = this.httpObj.responseText;
-        this.bmsText = this.httpObj.responseText
-        alert("loaded");
-    }else{
-        document.getElementById("text1").innerText = "Loading...";
-    }
-    alert("hasLoaded");
-}
+
 
 
 
