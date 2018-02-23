@@ -1,8 +1,9 @@
 // サーバー上のbmsファイルを読み込む
 class LoadTextFile {
     constructor(fileName) {
-        let hasLoaded = false;
-        let httpObj = this.createXMLHttpRequest(this.displayData);
+        this.bmsText = "";
+        this.hasLoaded = false;
+        let httpObj = this.createXMLHttpRequest();
         if (httpObj)
         {
             alert("in loadTextData before open");
@@ -12,7 +13,7 @@ class LoadTextFile {
     }
 
     // HTTP通信用
-    createXMLHttpRequest(cbFunc)
+    createXMLHttpRequest()
     {
         var XMLhttpObject = null;
         try{
@@ -28,7 +29,7 @@ class LoadTextFile {
                 }
             }
         }
-        if (XMLhttpObject) XMLhttpObject.onreadystatechange = cbFunc;
+        if (XMLhttpObject) XMLhttpObject.onreadystatechange = this.displayData;
         return XMLhttpObject;
     }
 
@@ -38,7 +39,7 @@ class LoadTextFile {
         if ((this.httpObj.readyState == 4) && (this.httpObj.status == 200))
         {
             document.getElementById("text1").innerText = this.httpObj.responseText;
-            this.hasLoaded = true;
+            this.bmsText =
             alert("loaded");
         }else{
             document.getElementById("text1").innerText = "Loading...";
@@ -46,6 +47,10 @@ class LoadTextFile {
         alert("hasLoaded");
     }
 
+    get()
+    {
+        return this.httpObj.responseText
+    }
 }
 
 
@@ -56,4 +61,5 @@ function calc() {
     const loadTextFile = new LoadTextFile("data.txt");
 
     alert("in calc");
+    loadTextFile.get()
 }
