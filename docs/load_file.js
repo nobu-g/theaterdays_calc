@@ -9,6 +9,7 @@ class LoadTextFile {
             alert("in loadTextData before open");
             this.httpObj.open("GET", fileName, true);
             this.httpObj.send(null);
+            this.httpObj.abort();
         }
     }
 
@@ -31,8 +32,33 @@ class LoadTextFile {
             }
         }
         if (XMLhttpObject) {
-            XMLhttpObject.onreadystatechange = this.displayData;
             alert("objectexists");
+
+            XMLhttpObject.onreadystatechange = function() {
+                switch ( XMLhttpObject.readyState ) {
+                case 0:
+                    // 未初期化状態.
+                    document.getElementById("text1").innerText = 'uninitialized!';
+                    break;
+                case 1: // データ送信中.
+                    document.getElementById("text1").innerText = 'loading...';
+                    break;
+                case 2: // 応答待ち.
+                    document.getElementById("text1").innerText = 'loaded.';
+                    break;
+                case 3: // データ受信中.
+                    document.getElementById("text1").innerText = 'interactive... '+XMLhttpObject.responseText.length+' bytes.';
+                    break;
+                case 4: // データ受信完了.
+                    if( XMLhttpObject.status == 200 || XMLhttpObject.status == 304 ) {
+                        var data = XMLhttpObject.responseText; // responseXML もあり
+                        document.getElementById("text1").innerText = 'COMPLETE! :'+data;
+                    } else {
+                        document.getElementById("text1").innerText = 'Failed. HttpStatus: '+XMLhttpObject.statusText;
+                    }
+                    break;
+                }
+            }
         }
         else
             alert("objectnill");
