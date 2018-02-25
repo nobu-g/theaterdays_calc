@@ -48,7 +48,7 @@ class LoadTextFile {
                     if( xhr.status == 200 || xhr.status == 304 ) {
                         this.bmsText = xhr.responseText; // responseXML もあり
                         this.hasLoaded = true;
-                        document.getElementById("text1").innerText = 'COMPLETE!';
+                        document.getElementById("text1").innerText = 'COMPLETE!' + this.bmsText + '###' + xhr.responseText;
                     } else {
                         document.getElementById("text1").innerText = 'Failed. HttpStatus: ' + xhr.statusText;
                     }
