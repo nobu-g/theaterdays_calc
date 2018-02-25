@@ -1,9 +1,8 @@
 // サーバー上のbmsファイルを読み込む
 
-let bmsText = "ini";
+let bmsText = "initialValue";
 
 function loadTextFile(fileName) {
-    alert("in loadTextFile");
     const xhr = createXMLHttpRequest();
     if (xhr)
     {

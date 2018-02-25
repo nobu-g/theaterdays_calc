@@ -15,6 +15,4 @@ function parse(bmsText) {
 
 
     return "testnotes";
-
-
 }
