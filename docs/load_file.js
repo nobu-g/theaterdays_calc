@@ -7,9 +7,9 @@ class LoadTextFile {
         if (this.httpObj)
         {
             alert("in loadTextData before open");
-            this.httpObj.open("GET", fileName, true);
+            this.httpObj.open("GET", fileName, false);
             this.httpObj.send(null);
-            this.httpObj.abort();
+            // this.httpObj.abort();
         }
     }
 
