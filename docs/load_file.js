@@ -26,14 +26,11 @@ class LoadTextFile {
                 try{
                     xhr = new ActiveXObject("Microsoft.XMLHTTP");
                 }catch(e){
-                    alert("objectnilllllllllllll");
                     return null;
                 }
             }
         }
         if (xhr) {
-            alert("objectexists");
-
             xhr.onreadystatechange = function() {
                 switch ( xhr.readyState ) {
                 case 0:
@@ -47,12 +44,13 @@ class LoadTextFile {
                     document.getElementById("text1").innerText = 'loaded.';
                     break;
                 case 3: // データ受信中.
-                    document.getElementById("text1").innerText = 'interactive... '+xhr.responseText.length+' bytes.';
+                    document.getElementById("text1").innerText = 'interactive... ' + xhr.responseText.length + ' bytes.';
                     break;
                 case 4: // データ受信完了.
                     if( xhr.status == 200 || xhr.status == 304 ) {
-                        var data = xhr.responseText; // responseXML もあり
-                        document.getElementById("text1").innerText = 'COMPLETE! :'+data;
+                        this.bmsText = xhr.responseText; // responseXML もあり
+                        this.hasLoaded = true;
+                        document.getElementById("text1").innerText = 'COMPLETE!';
                     } else {
                         document.getElementById("text1").innerText = 'Failed. HttpStatus: '+xhr.statusText;
                     }
@@ -60,42 +58,13 @@ class LoadTextFile {
                 }
             }
         }
-        else
-            alert("objectnill");
-
 
         return xhr;
-    }
-
-    // XMLHttpRequest のステータスが変わるごとに複数回呼ばれる
-    displayData()
-    {
-        if ((this.httpObj.readyState == 4) && (this.httpObj.status == 200))
-        {
-            document.getElementById("text1").innerText = this.httpObj.responseText;
-            this.bmsText = this.httpObj.responseText
-            alert("loaded");
-        }else{
-            document.getElementById("text1").innerText = "Loading...";
-        }
-        alert("hasLoaded");
     }
 
 
     get()
     {
-        return this.httpObj.readyState;
+        return this.bmsText;
     }
-}
-
-
-
-
-
-
-function calc() {
-    const loadTextFile = new LoadTextFile('data.txt');
-    alert("before get");
-    // alert("in calc");
-    alert(loadTextFile.get());
 }
