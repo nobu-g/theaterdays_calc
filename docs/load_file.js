@@ -1,7 +1,7 @@
 // サーバー上のbmsファイルを読み込む
 class LoadTextFile {
     constructor(fileName) {
-        alert("in constructor/kss");
+        alert("in constructor/tyss");
         this.bmsText = "ini";
         this.hasLoaded = true;
         this.xhr = this.createXMLHttpRequest();
@@ -47,8 +47,8 @@ class LoadTextFile {
                     break;
                 case 4: // データ受信完了.
                     if( xhr.status == 200 || xhr.status == 304 ) {
-                        this.bmsText = xhr.responseText; // responseXML もあり
-                        this.hasLoaded = true;
+                        this._bmsText = xhr.responseText; // responseXML もあり
+                        this._hasLoaded = true;
                         document.getElementById("text1").innerText = 'COMPLETE!' + this.bmsText + '###' + xhr.responseText;
                     } else {
                         document.getElementById("text1").innerText = 'Failed. HttpStatus: ' + xhr.statusText;
@@ -63,8 +63,8 @@ class LoadTextFile {
 
 
     get() {
-        if (this.hasLoaded == true)
-            return this.bmsText;
+        if (this._hasLoaded == true)
+            return this._bmsText;
         else
             return "not loaded";
     }
