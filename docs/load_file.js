@@ -6,7 +6,6 @@ class LoadTextFile {
         this.xhr = this.createXMLHttpRequest();
         if (this.xhr)
         {
-            alert("in loadTextData before open");
             this.xhr.open("GET", fileName, false);
             this.xhr.send(null);
             // this.xhr.abort();
@@ -14,8 +13,7 @@ class LoadTextFile {
     }
 
     // HTTP通信用
-    createXMLHttpRequest()
-    {
+    createXMLHttpRequest() {
         var xhr = null;
         try{
             xhr = new XMLHttpRequest();
@@ -52,7 +50,7 @@ class LoadTextFile {
                         this.hasLoaded = true;
                         document.getElementById("text1").innerText = 'COMPLETE!';
                     } else {
-                        document.getElementById("text1").innerText = 'Failed. HttpStatus: '+xhr.statusText;
+                        document.getElementById("text1").innerText = 'Failed. HttpStatus: ' + xhr.statusText;
                     }
                     break;
                 }
@@ -63,8 +61,10 @@ class LoadTextFile {
     }
 
 
-    get()
-    {
-        return this.bmsText;
+    get() {
+        if (this.hasLoaded)
+            return this.bmsText;
+        else
+            return "not loaded"
     }
 }
