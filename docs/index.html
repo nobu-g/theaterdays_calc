@@ -33,6 +33,8 @@
 
 
 <script type="text/javascript" src="load_file.js"></script>
+<script type="text/javascript" src="parse.js"></script>
+<script type="text/javascript" src="simulate.js"></script>
 <script>
 
 // アイドルのタイプ(属性)が変更されたとき呼ばれる
@@ -43,12 +45,12 @@ function setType() {
 
 
 
-
+// 最高スコアを計算
 function calc() {
-    loadTextFile('data.txt');
-    alert("before get");
-    // alert("in calc");
+    loadTextFile('Base.cpp');
     alert(bmsText);
+    const notes = parse(bmsText);
+    simulate(notes);
 }
 
 

@@ -9,7 +9,7 @@ function loadTextFile(fileName) {
     {
         xhr.open("GET", fileName, false);
         xhr.send(null);
-        // xhr.abort();
+        xhr.abort();
     }
 }
 
