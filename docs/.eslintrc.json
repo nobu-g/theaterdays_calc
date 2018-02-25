@@ -11,7 +11,12 @@
         "ActiveXObject": false
     },
     "rules": {
+        "semi": ["error", "always"],
+        "semi-spacing": ["error", {"after": true, "before": false}],
+        "semi-style": ["error", "last"],
         "no-extra-semi": "warn",
+        "no-unexpected-multiline": "error",
+        "no-unreachable": "warn",
         "no-undef": "error",
         "no-unused-vars": "warn"
     }
