@@ -1,7 +1,7 @@
 // サーバー上のbmsファイルを読み込む
 class LoadTextFile {
     constructor(fileName) {
-        alert("in constructor");
+        alert("in constructor/k");
         this.bmsText = "ini";
         this.hasLoaded = false;
         this.xhr = this.createXMLHttpRequest();
@@ -63,7 +63,7 @@ class LoadTextFile {
 
 
     get() {
-        if (this.hasLoaded)
+        if (this.hasLoaded == true)
             return this.bmsText;
         else
             return "not loaded";
