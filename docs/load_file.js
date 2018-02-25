@@ -3,39 +3,39 @@ class LoadTextFile {
     constructor(fileName) {
         this.bmsText = "";
         this.hasLoaded = false;
-        this.httpObj = this.createXMLHttpRequest();
-        if (this.httpObj)
+        this.xhr = this.createXMLHttpRequest();
+        if (this.xhr)
         {
             alert("in loadTextData before open");
-            this.httpObj.open("GET", fileName, false);
-            this.httpObj.send(null);
-            // this.httpObj.abort();
+            this.xhr.open("GET", fileName, false);
+            this.xhr.send(null);
+            // this.xhr.abort();
         }
     }
 
     // HTTP通信用
     createXMLHttpRequest()
     {
-        var XMLhttpObject = null;
+        var xhr = null;
         try{
-            XMLhttpObject = new XMLHttpRequest();
+            xhr = new XMLHttpRequest();
         }catch(e){
             try{
-                XMLhttpObject = new ActiveXObject("Msxml2.XMLHTTP");
+                xhr = new ActiveXObject("Msxml2.XMLHTTP");
             }catch(e){
                 try{
-                    XMLhttpObject = new ActiveXObject("Microsoft.XMLHTTP");
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
                 }catch(e){
                     alert("objectnilllllllllllll");
                     return null;
                 }
             }
         }
-        if (XMLhttpObject) {
+        if (xhr) {
             alert("objectexists");
 
-            XMLhttpObject.onreadystatechange = function() {
-                switch ( XMLhttpObject.readyState ) {
+            xhr.onreadystatechange = function() {
+                switch ( xhr.readyState ) {
                 case 0:
                     // 未初期化状態.
                     document.getElementById("text1").innerText = 'uninitialized!';
@@ -47,14 +47,14 @@ class LoadTextFile {
                     document.getElementById("text1").innerText = 'loaded.';
                     break;
                 case 3: // データ受信中.
-                    document.getElementById("text1").innerText = 'interactive... '+XMLhttpObject.responseText.length+' bytes.';
+                    document.getElementById("text1").innerText = 'interactive... '+xhr.responseText.length+' bytes.';
                     break;
                 case 4: // データ受信完了.
-                    if( XMLhttpObject.status == 200 || XMLhttpObject.status == 304 ) {
-                        var data = XMLhttpObject.responseText; // responseXML もあり
+                    if( xhr.status == 200 || xhr.status == 304 ) {
+                        var data = xhr.responseText; // responseXML もあり
                         document.getElementById("text1").innerText = 'COMPLETE! :'+data;
                     } else {
-                        document.getElementById("text1").innerText = 'Failed. HttpStatus: '+XMLhttpObject.statusText;
+                        document.getElementById("text1").innerText = 'Failed. HttpStatus: '+xhr.statusText;
                     }
                     break;
                 }
@@ -64,7 +64,7 @@ class LoadTextFile {
             alert("objectnill");
 
 
-        return XMLhttpObject;
+        return xhr;
     }
 
     // XMLHttpRequest のステータスが変わるごとに複数回呼ばれる
