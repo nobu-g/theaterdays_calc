@@ -37,7 +37,7 @@
 
 // アイドルのタイプ(属性)が変更されたとき呼ばれる
 function setType() {
-    alert("updated45");
+    alert("updated457");
     document.getElementById("text1").innerText = "konnichiwa";
 }
 
@@ -45,10 +45,10 @@ function setType() {
 
 
 function calc() {
-    const loadTextFile = new LoadTextFile('data.txt');
+    loadTextFile('data.txt');
     alert("before get");
     // alert("in calc");
-    alert(loadTextFile.get());
+    alert(bmsText);
 }
 
 
