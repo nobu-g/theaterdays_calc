@@ -4,7 +4,7 @@ let bmsText = "ini";
 
 function loadTextFile(fileName) {
     alert("in loadTextFile");
-    let xhr = createXMLHttpRequest();
+    const xhr = createXMLHttpRequest();
     if (xhr)
     {
         xhr.open("GET", fileName, false);
@@ -15,7 +15,7 @@ function loadTextFile(fileName) {
 
 // HTTP通信用
 function createXMLHttpRequest() {
-    var xhr = null;
+    let xhr = null;
     try{
         xhr = new XMLHttpRequest();
     }catch(e){
