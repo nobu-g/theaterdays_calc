@@ -1,12 +1,12 @@
 // サーバー上のbmsファイルを読み込む
 
-let bmsText = "initialValue";
+let bmsText = 'initialValue';
 
 function loadTextFile(fileName) {
     const xhr = createXMLHttpRequest();
     if (xhr)
     {
-        xhr.open("GET", fileName, false);
+        xhr.open('GET', fileName, false);
         xhr.send(null);
         xhr.abort();
     }
@@ -15,15 +15,15 @@ function loadTextFile(fileName) {
 // HTTP通信用
 function createXMLHttpRequest() {
     let xhr = null;
-    try{
+    try {
         xhr = new XMLHttpRequest();
-    }catch(e){
-        try{
-            xhr = new ActiveXObject("Msxml2.XMLHTTP");
-        }catch(e){
-            try{
-                xhr = new ActiveXObject("Microsoft.XMLHTTP");
-            }catch(e){
+    } catch(e) {
+        try {
+            xhr = new ActiveXObject('Msxml2.XMLHTTP');
+        } catch(e) {
+            try {
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            } catch(e) {
                 return null;
             }
         }
@@ -33,23 +33,23 @@ function createXMLHttpRequest() {
             switch ( xhr.readyState ) {
             case 0:
                 // 未初期化状態.
-                document.getElementById("text1").innerText = 'uninitialized!';
+                document.getElementById('text1').innerText = 'uninitialized!';
                 break;
             case 1: // データ送信中.
-                document.getElementById("text1").innerText = 'loading...';
+                document.getElementById('text1').innerText = 'loading...';
                 break;
             case 2: // 応答待ち.
-                document.getElementById("text1").innerText = 'loaded.';
+                document.getElementById('text1').innerText = 'loaded.';
                 break;
             case 3: // データ受信中.
-                document.getElementById("text1").innerText = 'interactive... ' + xhr.responseText.length + ' bytes.';
+                document.getElementById('text1').innerText = 'interactive... ' + xhr.responseText.length + ' bytes.';
                 break;
             case 4: // データ受信完了.
                 if( xhr.status == 200 || xhr.status == 304 ) {
                     bmsText = xhr.responseText; // responseXML もあり
-                    document.getElementById("text1").innerText = 'COMPLETE!';
+                    document.getElementById('text1').innerText = 'COMPLETE!';
                 } else {
-                    document.getElementById("text1").innerText = 'Failed. HttpStatus: ' + xhr.statusText;
+                    document.getElementById('text1').innerText = 'Failed. HttpStatus: ' + xhr.statusText;
                 }
                 break;
             }
