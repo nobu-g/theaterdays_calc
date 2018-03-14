@@ -15,9 +15,12 @@
         "semi-spacing": ["error", {"after": true, "before": false}],
         "semi-style": ["error", "last"],
         "no-extra-semi": "warn",
+        "quotes": ["warn", "single"],
         "no-unexpected-multiline": "error",
         "no-unreachable": "warn",
         "no-undef": "error",
-        "no-unused-vars": "warn"
+        "no-unused-vars": "warn",
+        "no-empty": "warn",
+        "no-console": "off"
     }
 }

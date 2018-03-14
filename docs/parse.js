@@ -1,11 +1,28 @@
+class Note {
+    constructor(beat, size, next) {
+        this.beat = beat;
+        this.size = size;   // 0: 通常ノーツ, 1: 大ノーツ, 2: 特大ノーツ
+        this.next = next;
+    }
+}
+
+class ProcessedBmsLine {
+    constructor(bar, body) {
+        this.bar = bar;
+        this.body = body;
+    }
+}
+
 /* bmsデータをパース */
 function parse(bmsText) {
 
-    var bmsData = new Array();
+    let mainData = new Array();
+    let notes = new Array();
+    let musicStartPos = 0;
 
-    bmsData = bmsText.split("\n");
+    let bmsData = new Array();
+    bmsData = bmsText.split('\n');
 
-    var mainData = new Array();
     // メインデータ部から#を取り除き、mainDataに格納
     for (const bmsLine of bmsData) {
         if (bmsLine[0] == '#' && !isNaN(parseInt(bmsLine[1]))) {
@@ -13,6 +30,90 @@ function parse(bmsText) {
         }
     }
 
+    const availableChannels = new Array(11, 12, 13, 14, 15, 18, 19);
+    let processedMainData = new Array();
+    for (const data of mainData) {
+        const bar = parseInt(data.substring(0, 3));
+        const channel = parseInt(data.substring(3, 5));
+        const bodyString = data.substring(6);
+        let body = new Array();
+        for (let i = 0; i < bodyString.length / 2; i++) {
+            body.push(bodyString.substring(i, i + 2));
+        }
 
-    return "testnotes";
+        if (availableChannels.indexOf(channel) >= 0) {
+            processedMainData.push(new ProcessedBmsLine(bar, body));
+        } else if (channel == 1) {
+            // 楽曲開始命令の処理
+            for (let i = 0; i < body.length; i++) {
+                if (body[i] == '10') {
+                    const unitBeat = 4.0 / body.length;
+                    musicStartPos = bar * 4.0  + unitBeat * i;
+                }
+            }
+        }
+    }
+
+    let longNotes1 = new Array();
+    let longNotes2 = new Array();
+    for (const data of processedMainData) {
+        const unitBeat = 4.0 / data.body.length;
+        for (let i = 0; i < data.body.length; i++) {
+            const beat = data.bar * 4.0 + unitBeat * i;
+            switch (data.body[i]) {
+            case '00':                                        break;
+            case '01':      notes.push(new Note(beat, 0, 0)); break;
+            case '02':      notes.push(new Note(beat, 0, 0)); break;
+            case '03': longNotes1.push(new Note(beat, 0, 0)); break;
+            case '04':                                        break;
+            case '05': longNotes1.push(new Note(beat, 0, 0)); break;
+            case '06': longNotes1.push(new Note(beat, 0, 0)); break;
+            case '07': longNotes2.push(new Note(beat, 0, 0)); break;
+            case '08':                                        break;
+            case '09': longNotes2.push(new Note(beat, 0, 0)); break;
+            case '0A': longNotes2.push(new Note(beat, 0, 0)); break;
+            case '0B':      notes.push(new Note(beat, 1, 0)); break;
+            case '0C': longNotes1.push(new Note(beat, 1, 0)); break;
+            case '0D': longNotes1.push(new Note(beat, 1, 0)); break;
+            case '0E': longNotes2.push(new Note(beat, 1, 0)); break;
+            case '0F': longNotes2.push(new Note(beat, 1, 0)); break;
+            case '0G':      notes.push(new Note(beat, 2, 0)); break;
+            default: console.log('サポート外のノーツオブジェクト');
+            }
+        }
+    }
+
+    if (longNotes1.length % 2 == 1 || longNotes2.length % 2 == 1) {
+        console.log('ロング開始ノーツと終了ノーツの数が一致しません');
+        return notes;
+    }
+
+    // beatでソート
+    longNotes1.sort(function(n1, n2) {
+        if (n1.beat < n2.beat) return -1;
+        if (n1.beat > n2.beat) return 1;
+        return 0;
+    });
+    longNotes2.sort(function(n1, n2) {
+        if (n1.beat < n2.beat) return -1;
+        if (n1.beat > n2.beat) return 1;
+        return 0;
+    });
+
+    for (let i = 0; i < longNotes1.length / 2; i++) {
+        longNotes1[i * 2].next = longNotes1[i * 2 + 1];
+        notes.push(longNotes1[i * 2]);
+    }
+    for (let i = 0; i < longNotes2.length / 2; i++) {
+        longNotes2[i * 2].next = longNotes2[i * 2 + 1];
+        notes.push(longNotes2[i * 2]);
+    }
+
+    notes.sort(function(n1, n2) {
+        if (n1.beat < n2.beat) return -1;
+        if (n1.beat > n2.beat) return 1;
+        return 0;
+    });
+    
+    return notes;
 }
