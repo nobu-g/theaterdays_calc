@@ -38,7 +38,7 @@ function parse(bmsText) {
         const bodyString = data.substring(6);
         let body = new Array();
         for (let i = 0; i < bodyString.length / 2; i++) {
-            body.push(bodyString.substring(i, i + 2));
+            body.push(bodyString.substring(i*2, i*2 + 2));
         }
 
         if (availableChannels.indexOf(channel) >= 0) {
@@ -78,7 +78,7 @@ function parse(bmsText) {
             case '0E': longNotes2.push(new Note(beat, 1, 0)); break;
             case '0F': longNotes2.push(new Note(beat, 1, 0)); break;
             case '0G':      notes.push(new Note(beat, 2, 0)); break;
-            default: console.log('サポート外のノーツオブジェクト');
+            default: console.log('サポート外のノーツオブジェクト: ' + data.body[i]);
             }
         }
     }
@@ -114,6 +114,6 @@ function parse(bmsText) {
         if (n1.beat > n2.beat) return 1;
         return 0;
     });
-    
+
     return notes;
 }
