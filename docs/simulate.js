@@ -1,5 +1,5 @@
 function simulate(notes) {
     for (const note of notes) {
-        document.write(typeof(note.next) + '<br>');
+        document.write(note.beat + '<br>');
     }
 }
