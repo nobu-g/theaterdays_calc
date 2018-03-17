@@ -1,3 +1,7 @@
+html,body {
+    font-family: "ヒラギノ角ゴ Pro W3","メイリオ",sans-serif;
+}
+
 h1, h2 {
     margin: 0 auto;
     width: 400px;
@@ -16,10 +20,11 @@ form {
 
 #skill input {
     width: 30px;
+    height: 1em;
     margin: 5px;
 }
 #skill select {
-
+    margin: 5px;
 }
 
 form div + div {
