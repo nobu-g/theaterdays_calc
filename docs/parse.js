@@ -115,5 +115,14 @@ function parse(bmsText) {
         return 0;
     });
 
+    // 最初のノーツが4拍目からスタートするように
+    const beatDiff = notes[0].beat - 4;
+    for (const note of notes) {
+        note.beat -= beatDiff;
+        if (note.next != 0) {
+            note.next.beat -= beatDiff;
+        }
+    }
+
     return notes;
 }
