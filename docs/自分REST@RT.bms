@@ -2,33 +2,33 @@
 *---------------------- HEADER FIELD
 
 #PLAYER 1
-#GENRE ƒAƒjƒ
-#TITLE Ž©•ªREST@RT
+#GENRE ï¿½Aï¿½jï¿½ï¿½
+#TITLE ï¿½ï¿½ï¿½ï¿½REST@RT
 #ARTIST 765PRO ALLSTARS
 #BPM 171
-#PLAYLEVEL 
+#PLAYLEVEL 18
 #RANK 3
 
 
 #LNTYPE 1
 
-#WAV01 ƒ^ƒbƒv.mp3
-#WAV02 ƒtƒŠƒbƒN.mp3
-#WAV03 Žn‚ß‚P.mp3
-#WAV04 “r’†‚P.mp3
-#WAV05 —£‚µ‚P.mp3
-#WAV06 ƒtƒŠƒbƒN—£‚µ‚P.mp3
-#WAV07 Žn‚ß‚Q.mp3
-#WAV08 “r’†‚Q.mp3
-#WAV09 —£‚µ‚Q.mp3
-#WAV0A ƒtƒŠƒbƒN—£‚µ‚Q.mp3
-#WAV0B ƒ^ƒbƒv‘å.mp3
-#WAV0C Žn‚ß‚P‘å.mp3
-#WAV0D —£‚µ‚P‘å.mp3
-#WAV0E Žn‚ß‚Q‘å.mp3
-#WAV0F —£‚µ‚Q‘å.mp3
-#WAV0G ƒ^ƒbƒv“Á‘å.mp3
-#WAV10 Ž©•ªREST@RT.mp3
+#WAV01 ï¿½^ï¿½bï¿½v.mp3
+#WAV02 ï¿½tï¿½ï¿½ï¿½bï¿½N.mp3
+#WAV03 ï¿½nï¿½ß‚P.mp3
+#WAV04 ï¿½rï¿½ï¿½ï¿½P.mp3
+#WAV05 ï¿½ï¿½ï¿½ï¿½ï¿½P.mp3
+#WAV06 ï¿½tï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½P.mp3
+#WAV07 ï¿½nï¿½ß‚Q.mp3
+#WAV08 ï¿½rï¿½ï¿½ï¿½Q.mp3
+#WAV09 ï¿½ï¿½ï¿½ï¿½ï¿½Q.mp3
+#WAV0A ï¿½tï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½Q.mp3
+#WAV0B ï¿½^ï¿½bï¿½vï¿½ï¿½.mp3
+#WAV0C ï¿½nï¿½ß‚Pï¿½ï¿½.mp3
+#WAV0D ï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½ï¿½.mp3
+#WAV0E ï¿½nï¿½ß‚Qï¿½ï¿½.mp3
+#WAV0F ï¿½ï¿½ï¿½ï¿½ï¿½Qï¿½ï¿½.mp3
+#WAV0G ï¿½^ï¿½bï¿½vï¿½ï¿½ï¿½ï¿½.mp3
+#WAV10 ï¿½ï¿½ï¿½ï¿½REST@RT.mp3
 
 
 *---------------------- MAIN DATA FIELD
@@ -455,5 +455,3 @@
 #08113:01
 #08115:0001020000000000
 #08118:01
-
-

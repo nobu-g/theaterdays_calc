@@ -1,5 +1,6 @@
-function simulate(notes) {
+
+function simulate(notes, BPM, level) {alert(BPM); alert(level);
     for (const note of notes) {
-        document.write(note.beat + '<br>');
+        const second = note.beat / BPM * 60;
     }
 }

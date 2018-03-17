@@ -1,8 +1,18 @@
+// ノーツ情報
 class Note {
     constructor(beat, size, next) {
         this.beat = beat;
         this.size = size;   // 0: 通常ノーツ, 1: 大ノーツ, 2: 特大ノーツ
         this.next = next;
+    }
+}
+
+// 楽曲情報
+class MusicData {
+    constructor(notes, BPM, level) {
+        this.notes = notes;
+        this.BPM = BPM;
+        this.level = level;
     }
 }
 
@@ -18,15 +28,22 @@ function parse(bmsText) {
 
     let mainData = new Array();
     let notes = new Array();
-    let musicStartPos = 0;
+    let BPM;
+    let level;
 
     let bmsData = new Array();
     bmsData = bmsText.split('\n');
 
-    // メインデータ部から#を取り除き、mainDataに格納
+    // メインデータ部から#を取り除き、mainDataに格納。BPM, levelを読み取り
     for (const bmsLine of bmsData) {
-        if (bmsLine[0] == '#' && !isNaN(parseInt(bmsLine[1]))) {
-            mainData.push(bmsLine.substring(1));
+        if (bmsLine[0] == '#') {
+            if (!isNaN(parseInt(bmsLine[1]))) {
+                mainData.push(bmsLine.substring(1));
+            } else if (bmsLine.substr(1, 3) == 'BPM') {
+                BPM = parseInt(bmsLine.substring(5));
+            } else if (bmsLine.substr(1, 9) == 'PLAYLEVEL') {
+                level = parseInt(bmsLine.substring(11)); alert(bmsLine.substring(11));
+            }
         }
     }
 
@@ -43,14 +60,6 @@ function parse(bmsText) {
 
         if (availableChannels.indexOf(channel) >= 0) {
             processedMainData.push(new ProcessedBmsLine(bar, body));
-        } else if (channel == 1) {
-            // 楽曲開始命令の処理
-            for (let i = 0; i < body.length; i++) {
-                if (body[i] == '10') {
-                    const unitBeat = 4.0 / body.length;
-                    musicStartPos = bar * 4.0  + unitBeat * i;
-                }
-            }
         }
     }
 
@@ -85,7 +94,7 @@ function parse(bmsText) {
 
     if (longNotes1.length % 2 == 1 || longNotes2.length % 2 == 1) {
         console.log('ロング開始ノーツと終了ノーツの数が一致しません');
-        return notes;
+        return new MusicData(notes, BPM, level);
     }
 
     // beatでソート
@@ -124,5 +133,5 @@ function parse(bmsText) {
         }
     }
 
-    return notes;
+    return new MusicData(notes, BPM, level);
 }
