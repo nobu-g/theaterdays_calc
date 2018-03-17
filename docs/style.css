@@ -1,6 +1,10 @@
+h1, h2 {
+    margin: 0 auto;
+    width: 400px;
+}
 
 
-form, h2 {
+form {
     /* フォームをページの中央に置く */
     margin: 0 auto;
     width: 400px;
@@ -8,6 +12,14 @@ form, h2 {
     /* padding: 1em;
     border: 1px solid #CCC;
     border-radius: 1em; */
+}
+
+#skill input {
+    width: 30px;
+    margin: 5px;
+}
+#skill select {
+
 }
 
 form div + div {

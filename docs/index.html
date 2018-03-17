@@ -1,39 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <title>ミリシタスコア計算機</title>
 
-<title>テストだよ</title>
-
-<link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 
 </head>
 
 <body>
+    <h1>
+        ミリシタスコア計算機
+    </h1>
     <h2>
-        センター
+        スキルと合計アピール値を入力し、楽曲を選択してください。
     </h2>
-    <form name = "center">
+    <form>
+        <div id="skill">
+            <div id="skill1">
+                <p>
+                    スキル1:<br>
+                    <input class="interval" required="required" min="0" type="number">秒ごとに
+                    <input class="probability" required="required" min="0" max="100" type="number">%の確率で
+                    <input class="duration" required="required" min="0" type="number">秒間、<br>
+                    <select class="target" onchange="setMusic()">
+                        <option value="">選択</option>
+                        <option value="">Perfect/Greatのスコア</option>
+                        <option value="">Perfectのスコア</option>
+                        <option value="">コンボボーナス</option>
+                    </select>が
+                    <input class="rate" required="required" min="0" max="100" type="number">%アップ
+                </p>
+            </div>
+            <div id="skill2">
+                <p>
+                    スキル2:<br>
+                    <input class="interval" required="required" min="0" type="number">秒ごとに
+                    <input class="probability" required="required" min="0" max="100" type="number">%の確率で
+                    <input class="duration" required="required" min="0" type="number">秒間、<br>
+                    <select class="target" onchange="setMusic()">
+                        <option value="">選択</option>
+                        <option value="">Perfect/Greatのスコア</option>
+                        <option value="">Perfectのスコア</option>
+                        <option value="">コンボボーナス</option>
+                    </select>が
+                    <input class="rate" required="required" min="0" max="100" type="number">%アップ
+                </p>
+            </div>
+        </div>
+
         <div>
-            <label for="type">タイプ:</label>
-            <select name="type" id="type" onchange="setType()">
-                <option value="">タイプ選択</option>
-                <option value="">Princess</option>
-                <option value="">Fairy</option>
-                <option value="">Angel</option>
+            <label for="music">楽曲:</label>
+            <select id="music" onchange="setMusic()">
+                <option value="">楽曲選択</option>
+                <option value="">自分REST@RT</option>
+                <option value="">Brand New Theater!</option>
             </select>
         </div>
-        <div>
-            <label for="vocal">ボーカル:</label>
-            <input name="vocal" id="vocal" required="required" min="0" type="number">
-        </div>
-        <div>
-            <label for="dance">ダンス:</label>
-            <input name="dance" id="dance" required="required" min="0" type="number">
-        </div>
-        <div>
-            <label for="visual">ビジュアル:</label>
-            <input name="visual" id="visual" required="required" min="0" type="number">
-        </div>
+
+
 
         <div class="button">
             <input type="button" value="ファイル読み込み" onClick="calc()">　
@@ -50,8 +75,8 @@
 <script type="text/javascript" src="simulate.js"></script>
 <script>
 
-// アイドルのタイプ(属性)が変更されたとき呼ばれる
-function setType() {
+// 楽曲が変更されたとき呼ばれる
+function setMusic() {
     // document.getElementById("text1").innerText = "konnichiwa";
 }
 
