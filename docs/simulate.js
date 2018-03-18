@@ -1,5 +1,49 @@
+// スコアアップスキル
+class ScoreUp {
+    constructor(id) {
+        this.interval    = parseInt($('#' + id + ' input[name="interval"]'   ).val());
+        this.probability = parseInt($('#' + id + ' input[name="probability"]').val()) / 100;
+        this.duration    = parseInt($('#' + id + ' input[name="duration"]'   ).val());
+        this.rate        = parseInt($('#' + id + ' input[name="rate"]'       ).val()) / 100;
+    }
+}
 
-function simulate(notes, BPM, level) {
+// コンボボーナススキル
+class ComboBonus {
+    constructor(id) {
+        this.interval    = parseInt($('#' + id + ' input[name="interval"]'   ).val());
+        this.probability = parseInt($('#' + id + ' input[name="probability"]').val()) / 100;
+        this.duration    = parseInt($('#' + id + ' input[name="duration"]'   ).val());
+        this.rate        = parseInt($('#' + id + ' input[name="rate"]'       ).val()) / 100;
+    }
+}
+
+// スコア上昇系スキルの効果を扱う
+class SkillEffect {
+    constructor() {
+        this.scoreUps = new Array();
+        this.comboBonuses = new Array();
+
+        for (let i = 1; i <= 5; i++) {
+            switch ($('#skill' + i + ' select option:selected').val()) {
+            case '':
+                console.log('選択されていません。');
+                break;
+            case 'score':
+                this.scoreUps.push(new ScoreUp('skill' + i));
+                break;
+            case 'combo':
+                this.comboBonuses.push(new ComboBonus('skill' + i));
+                break;
+            default:
+                console.log('セレクトボックスのvalueが不正です。');
+            }
+        }
+
+    }
+}
+
+function simulate(notes, bpm, level) {
 
     let allNotes = new Array();     // ロング終端も含めた全ノーツ配列
     for (const note of notes) {
@@ -20,7 +64,7 @@ function simulate(notes, BPM, level) {
     }
     for (const note of notes) {
         if (note.next != 0) {
-            const second = (note.next.beat - note.beat) / BPM * 60;
+            const second = (note.next.beat - note.beat) / bpm * 60;
             weightedNotesNum += second * 2;     // ロングノーツは1秒あたり重み2として加算
         }
     }
@@ -30,10 +74,11 @@ function simulate(notes, BPM, level) {
     // 以下の2つの値によりスコアが計算される
     const s = basicScore * 0.7 / weightedNotesNum;          // 小タップノーツの基本スコア
     const c = basicScore * 0.3 / (2 * notesNum - 66);       // コンボボーナス基本値
-    
 
+    // スキル
+    const skillEfect = new SkillEffect();
     // 実際にシミュレーション
     for (const note of notes) {
-        const second = note.beat / BPM * 60;
+        const second = note.beat / bpm * 60;
     }
 }

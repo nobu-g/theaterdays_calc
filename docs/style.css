@@ -39,7 +39,7 @@ select {
     margin: 5px;
 }
 
-.appeal input {
+#appeal input {
     width: 100px;
     height: 1em;
     padding-top: 1px;

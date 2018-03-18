@@ -9,9 +9,9 @@ class Note {
 
 // 楽曲情報
 class MusicData {
-    constructor(notes, BPM, level) {
+    constructor(notes, bpm, level) {
         this.notes = notes;
-        this.BPM = BPM;
+        this.bpm = bpm;
         this.level = level;
     }
 }
@@ -28,7 +28,7 @@ function parse(bmsText) {
 
     let mainData = new Array();
     let notes = new Array();
-    let BPM;
+    let bpm;
     let level;
 
     let bmsData = new Array();
@@ -40,7 +40,7 @@ function parse(bmsText) {
             if (!isNaN(parseInt(bmsLine[1]))) {
                 mainData.push(bmsLine.substring(1));
             } else if (bmsLine.substr(1, 3) == 'BPM') {
-                BPM = parseInt(bmsLine.substring(5));
+                bpm = parseInt(bmsLine.substring(5));
             } else if (bmsLine.substr(1, 9) == 'PLAYLEVEL') {
                 level = parseInt(bmsLine.substring(11));
             }
@@ -94,7 +94,7 @@ function parse(bmsText) {
 
     if (longNotes1.length % 2 == 1 || longNotes2.length % 2 == 1) {
         console.log('ロング開始ノーツと終了ノーツの数が一致しません');
-        return new MusicData(notes, BPM, level);
+        return new MusicData(notes, bpm, level);
     }
 
     // beatでソート
@@ -133,5 +133,5 @@ function parse(bmsText) {
         }
     }
 
-    return new MusicData(notes, BPM, level);
+    return new MusicData(notes, bpm, level);
 }

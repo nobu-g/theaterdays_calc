@@ -15,131 +15,132 @@
     <h2>
 
     </h2>
-    <form>
-        <div id="skill">
-            <div id="skill1">
-                <p>
-                    スキル1:<br>
-                    <input class="interval" required="required" min="0" type="number">秒ごとに
-                    <input class="probability" required="required" min="0" max="100" type="number">%の確率で
-                    <input class="duration" required="required" min="0" type="number">秒間、<br>
-                    <select class="target" onchange="setMusic()">
-                        <option value="">選択</option>
-                        <option value="">Perfect/Greatのスコア</option>
-                        <option value="">Perfectのスコア</option>
-                        <option value="">コンボボーナス</option>
-                    </select>が
-                    <input class="rate" required="required" min="0" max="100" type="number">%アップ
-                </p>
-            </div>
-            <div id="skill2">
-                <p>
-                    スキル2:<br>
-                    <input class="interval" required="required" min="0" type="number">秒ごとに
-                    <input class="probability" required="required" min="0" max="100" type="number">%の確率で
-                    <input class="duration" required="required" min="0" type="number">秒間、<br>
-                    <select class="target" onchange="setMusic()">
-                        <option value="">選択</option>
-                        <option value="">Perfect/Greatのスコア</option>
-                        <option value="">Perfectのスコア</option>
-                        <option value="">コンボボーナス</option>
-                    </select>が
-                    <input class="rate" required="required" min="0" max="100" type="number">%アップ
-                </p>
-            </div>
-
-            <div id="skill3">
-                <p>
-                    スキル3:<br>
-                    <input class="interval" required="required" min="0" type="number">秒ごとに
-                    <input class="probability" required="required" min="0" max="100" type="number">%の確率で
-                    <input class="duration" required="required" min="0" type="number">秒間、<br>
-                    <select class="target" onchange="setMusic()">
-                        <option value="">選択</option>
-                        <option value="">Perfect/Greatのスコア</option>
-                        <option value="">Perfectのスコア</option>
-                        <option value="">コンボボーナス</option>
-                    </select>が
-                    <input class="rate" required="required" min="0" max="100" type="number">%アップ
-                </p>
-            </div>
-            <div id="skill4">
-                <p>
-                    スキル4:<br>
-                    <input class="interval" required="required" min="0" type="number">秒ごとに
-                    <input class="probability" required="required" min="0" max="100" type="number">%の確率で
-                    <input class="duration" required="required" min="0" type="number">秒間、<br>
-                    <select class="target" onchange="setMusic()">
-                        <option value="">選択</option>
-                        <option value="">Perfect/Greatのスコア</option>
-                        <option value="">Perfectのスコア</option>
-                        <option value="">コンボボーナス</option>
-                    </select>が
-                    <input class="rate" required="required" min="0" max="100" type="number">%アップ
-                </p>
-            </div>
-            <div id="skill5">
-                <p>
-                    スキル5:<br>
-                    <input class="interval" required="required" min="0" type="number">秒ごとに
-                    <input class="probability" required="required" min="0" max="100" type="number">%の確率で
-                    <input class="duration" required="required" min="0" type="number">秒間、<br>
-                    <select class="target" onchange="setMusic()">
-                        <option value="">選択</option>
-                        <option value="">Perfect/Greatのスコア</option>
-                        <option value="">Perfectのスコア</option>
-                        <option value="">コンボボーナス</option>
-                    </select>が
-                    <input class="rate" required="required" min="0" max="100" type="number">%アップ
-                </p>
-            </div>
+    <form name="skill" id="skill">
+        <div id="skill1">
+            <p>
+                スキル1:<br>
+                <input name="interval" required="required" min="0" type="number">秒ごとに
+                <input name="probability" required="required" min="0" max="100" type="number">%の確率で
+                <input name="duration" required="required" min="0" type="number">秒間、<br>
+                <select name="target">
+                    <option value="">選択</option>
+                    <option value="score">Perfect/Greatのスコア</option>
+                    <option value="score">Perfectのスコア</option>
+                    <option value="combo">コンボボーナス</option>
+                </select>が
+                <input name="rate" required="required" min="0" max="100" type="number">%アップ
+            </p>
+        </div>
+        <div id="skill2">
+            <p>
+                スキル2:<br>
+                <input name="interval" required="required" min="0" type="number">秒ごとに
+                <input name="probability" required="required" min="0" max="100" type="number">%の確率で
+                <input name="duration" required="required" min="0" type="number">秒間、<br>
+                <select name="target">
+                    <option value="">選択</option>
+                    <option value="score">Perfect/Greatのスコア</option>
+                    <option value="score">Perfectのスコア</option>
+                    <option value="combo">コンボボーナス</option>
+                </select>が
+                <input name="rate" required="required" min="0" max="100" type="number">%アップ
+            </p>
         </div>
 
-        <div class="music">
+        <div id="skill3">
+            <p>
+                スキル3:<br>
+                <input name="interval" required="required" min="0" type="number">秒ごとに
+                <input name="probability" required="required" min="0" max="100" type="number">%の確率で
+                <input name="duration" required="required" min="0" type="number">秒間、<br>
+                <select name="target">
+                    <option value="">選択</option>
+                    <option value="score">Perfect/Greatのスコア</option>
+                    <option value="score">Perfectのスコア</option>
+                    <option value="combo">コンボボーナス</option>
+                </select>が
+                <input name="rate" required="required" min="0" max="100" type="number">%アップ
+            </p>
+        </div>
+        <div id="skill4">
+            <p>
+                スキル4:<br>
+                <input name="interval" required="required" min="0" type="number">秒ごとに
+                <input name="probability" required="required" min="0" max="100" type="number">%の確率で
+                <input name="duration" required="required" min="0" type="number">秒間、<br>
+                <select name="target">
+                    <option value="">選択</option>
+                    <option value="score">Perfect/Greatのスコア</option>
+                    <option value="score">Perfectのスコア</option>
+                    <option value="combo">コンボボーナス</option>
+            </select>が
+                <input name="rate" required="required" min="0" max="100" type="number">%アップ
+            </p>
+        </div>
+        <div id="skill5">
+            <p>
+                スキル5:<br>
+                <input name="interval" required="required" min="0" type="number">秒ごとに
+                <input name="probability" required="required" min="0" max="100" type="number">%の確率で
+                <input name="duration" required="required" min="0" type="number">秒間、<br>
+                <select name="target" onchange="setMusic()">
+                    <option value="">選択</option>
+                    <option value="score">Perfect/Greatのスコア</option>
+                    <option value="score">Perfectのスコア</option>
+                    <option value="combo">コンボボーナス</option>
+                </select>が
+                <input name="rate" required="required" min="0" max="100" type="number">%アップ
+            </p>
+        </div>
+    </form>
+
+    <form name="music">
+        <div id="music">
             <p>
                 楽曲:<br>
-                <select id="music" onchange="setMusic()">
+                <select name="music">
                     <option value="">楽曲選択</option>
-                    <option value="">自分REST@RT</option>
-                    <option value="">Brand New Theater!</option>
+                    <option value="自分REST@RT">自分REST@RT</option>
+                    <option value="Brand New Theater!">Brand New Theater!</option>
                 </select>
             </p>
         </div>
+    </form>
 
-        <div class="appeal">
+    <form name="appeal">
+        <div id="appeal">
             <p>
                 合計アピール:<br>
-                <input id="appeal" required="required" min="0" type="number">
+                <input name="appeal" required="required" min="0" type="number">
             </p>
         </div>
+    </form>
 
-
-
+    <form>
         <div class="button">
             <input type="button" value="ファイル読み込み" onClick="calc()">　
             <input type="button" value="クリア" onClick="document.getElementById('text1').innerText=''">
         </div>
     </form>
+
     <div id="text1"></div>
 
 
 
-
+<script type="text/javascript" src="jquery-3.3.1.min.js"></script>  // 最初に読み込む
 <script type="text/javascript" src="load_file.js"></script>
 <script type="text/javascript" src="parse.js"></script>
 <script type="text/javascript" src="simulate.js"></script>
 <script>
 
-// 楽曲が変更されたとき呼ばれる
-function setMusic() {
-    // document.getElementById("text1").innerText = "konnichiwa";
-}
 
 
 
 // 最高スコアを計算
 function calc() {
-    loadTextFile('https://nobu-g.github.io/theaterdays_calc/自分REST@RT.bms');
+    const musicName = $('#music select option:selected').val()
+    // loadTextFile('https://nobu-g.github.io/theaterdays_calc/' + musicName + '.bms');
+    loadTextFile('https://nobu-g.github.io/theaterdays_calc/自分REST@RT.bms');    // デバッグ用
     document.getElementById('text1').innerText = bmsText;
     const musicData = parse(bmsText);
     simulate(musicData.notes, musicData.BPM, musicData.level);
