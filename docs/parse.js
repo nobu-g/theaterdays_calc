@@ -42,7 +42,7 @@ function parse(bmsText) {
             } else if (bmsLine.substr(1, 3) == 'BPM') {
                 BPM = parseInt(bmsLine.substring(5));
             } else if (bmsLine.substr(1, 9) == 'PLAYLEVEL') {
-                level = parseInt(bmsLine.substring(11)); alert(bmsLine.substring(11));
+                level = parseInt(bmsLine.substring(11));
             }
         }
     }
