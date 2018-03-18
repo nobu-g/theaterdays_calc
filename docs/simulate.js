@@ -26,14 +26,14 @@ class SkillEffect {
 
         for (let i = 1; i <= 5; i++) {
             switch ($('#skill' + i + ' select option:selected').val()) {
-            case '':
-                console.log('選択されていません。');
-                break;
-            case 'score':
+            case 'score1':
+            case 'score2':
                 this.scoreUps.push(new ScoreUp('skill' + i));
                 break;
             case 'combo':
                 this.comboBonuses.push(new ComboBonus('skill' + i));
+                break;
+            case 'other':
                 break;
             default:
                 console.log('セレクトボックスのvalueが不正です。');
@@ -69,14 +69,14 @@ function simulate(notes, bpm, level) {
         }
     }
 
-    const appeal = parseInt(document.getElementById('appeal').value);   // 合計アピール値
+    const appeal = parseInt($('#appeal input').val());      // 合計アピール値
     const basicScore = appeal * (33 + level) / 20;          // 基準スコア
     // 以下の2つの値によりスコアが計算される
     const s = basicScore * 0.7 / weightedNotesNum;          // 小タップノーツの基本スコア
     const c = basicScore * 0.3 / (2 * notesNum - 66);       // コンボボーナス基本値
 
     // スキル
-    const skillEfect = new SkillEffect();
+    const skillEffect = new SkillEffect();
     // 実際にシミュレーション
     for (const note of notes) {
         const second = note.beat / bpm * 60;

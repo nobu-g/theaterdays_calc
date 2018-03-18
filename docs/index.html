@@ -25,8 +25,8 @@
                     <input name="duration" required="required" min="0" type="number">秒間、<br>
                     <select name="target" required="required">
                         <option></option>
-                        <option value="score">Perfect/Greatのスコア</option>
-                        <option value="score">Perfectのスコア</option>
+                        <option value="score1">Perfect/Greatのスコア</option>
+                        <option value="score2">Perfectのスコア</option>
                         <option value="combo">コンボボーナス</option>
                         <option value="other">その他</option>
                     </select>が
@@ -41,8 +41,8 @@
                     <input name="duration" required="required" min="0" type="number">秒間、<br>
                     <select name="target">
                         <option></option>
-                        <option value="score">Perfect/Greatのスコア</option>
-                        <option value="score">Perfectのスコア</option>
+                        <option value="score1">Perfect/Greatのスコア</option>
+                        <option value="score2">Perfectのスコア</option>
                         <option value="combo">コンボボーナス</option>
                         <option value="other">その他</option>
                     </select>が
@@ -58,8 +58,8 @@
                     <input name="duration" required="required" min="0" type="number">秒間、<br>
                     <select name="target">
                         <option></option>
-                        <option value="score">Perfect/Greatのスコア</option>
-                        <option value="score">Perfectのスコア</option>
+                        <option value="score1">Perfect/Greatのスコア</option>
+                        <option value="score2">Perfectのスコア</option>
                         <option value="combo">コンボボーナス</option>
                         <option value="other">その他</option>
                     </select>が
@@ -74,8 +74,8 @@
                     <input name="duration" required="required" min="0" type="number">秒間、<br>
                     <select name="target">
                         <option></option>
-                        <option value="score">Perfect/Greatのスコア</option>
-                        <option value="score">Perfectのスコア</option>
+                        <option value="score1">Perfect/Greatのスコア</option>
+                        <option value="score2">Perfectのスコア</option>
                         <option value="combo">コンボボーナス</option>
                         <option value="other">その他</option>
                 </select>が
@@ -90,8 +90,8 @@
                     <input name="duration" required="required" min="0" type="number">秒間、<br>
                     <select name="target">
                         <option></option>
-                        <option value="score">Perfect/Greatのスコア</option>
-                        <option value="score">Perfectのスコア</option>
+                        <option value="score1">Perfect/Greatのスコア</option>
+                        <option value="score2">Perfectのスコア</option>
                         <option value="combo">コンボボーナス</option>
                         <option value="other">その他</option>
                     </select>が
@@ -129,20 +129,28 @@
 
 
 <script type="text/javascript" src="jquery-3.3.1.min.js"></script>  <!-- 最初に読み込む -->
+<script type="text/javascript" src="jquery.cookie-1.4.1.min.js"></script>
 <script type="text/javascript" src="load_file.js"></script>
 <script type="text/javascript" src="parse.js"></script>
+<script type="text/javascript" src="config.js"></script>
 <script type="text/javascript" src="simulate.js"></script>
 <script>
 
 
-
+// ページ読み込み時に保存されていたデータを展開
+$(document).ready(function(){
+    setConfig();
+});
 
 // 最高スコアを計算
 function calc() {
+    storeConfig();    // 入力データを保存
+
     // エラーチェック
     for (const element of document.getElementsByTagName('form')[0]) {
-        if (element.validity.valid == false) { return; }
+        // if (element.validity.valid == false) { return; }
     }
+
     const musicName = $('#music select option:selected').val()
     // loadTextFile('https://nobu-g.github.io/theaterdays_calc/' + musicName + '.bms');
     loadTextFile('https://nobu-g.github.io/theaterdays_calc/自分REST@RT.bms');    // デバッグ用
