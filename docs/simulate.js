@@ -26,6 +26,9 @@ class SkillEffect {
 
         for (let i = 1; i <= 5; i++) {
             switch ($('#skill' + i + ' select option:selected').val()) {
+            case '':
+                alert('スキル' + i + 'は無視されます。');
+                break;
             case 'score1':
             case 'score2':
                 this.scoreUps.push(new ScoreUp('skill' + i));
