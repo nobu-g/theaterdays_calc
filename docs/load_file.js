@@ -1,12 +1,9 @@
 // サーバー上のbmsファイルを読み込む
-
-let bmsText = 'initialValue';
-
 function loadTextFile(fileName) {
     const xhr = createXMLHttpRequest();
     if (xhr)
     {
-        xhr.open('GET', fileName, false);
+        xhr.open('GET', fileName, true);
         xhr.send(null);
         xhr.abort();
     }
@@ -46,7 +43,9 @@ function createXMLHttpRequest() {
                 break;
             case 4: // データ受信完了.
                 if( xhr.status == 200 || xhr.status == 304 ) {
-                    bmsText = xhr.responseText; // responseXML もあり
+                    const bmsText = xhr.responseText; // responseXML もあり
+                    const musicData = window.parse(bmsText);
+                    window.simulate(musicData.notes, musicData.bpm, musicData.level);
                     document.getElementById('text1').innerText = 'COMPLETE!';
                 } else {
                     document.getElementById('text1').innerText = 'Failed. HttpStatus: ' + xhr.statusText;
