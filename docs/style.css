@@ -60,10 +60,9 @@ label {
 
 .button {
     /* ボタンを他のテキストフィールドと同じ場所に置く */
-    padding-left: 90px; /* label 要素と同じサイズ */
+    padding-left: 90px;
 }
-button {
-    /* このマージンは、ラベルとテキストフィールドの間のスペースと
-       おおよそ同じスペースを表す */
-    margin-left: .5em;
+
+.button input {
+    width: 100px;
 }

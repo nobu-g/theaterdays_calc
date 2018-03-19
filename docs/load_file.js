@@ -44,8 +44,8 @@ function createXMLHttpRequest() {
                 if( xhr.status == 200 || xhr.status == 304 ) {
                     const bmsText = xhr.responseText; // responseXML もあり
                     const musicData = window.parse(bmsText);
-                    window.simulate(musicData.notes, musicData.bpm, musicData.level);
-                    document.getElementById('text1').innerText = 'COMPLETE!';
+                    window.calc(musicData.notes, musicData.bpm, musicData.level);
+                    console.log('COMPLETE!');
                 } else {
                     document.getElementById('text1').innerText = 'Failed. HttpStatus: ' + xhr.statusText;
                 }
