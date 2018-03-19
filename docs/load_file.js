@@ -3,7 +3,7 @@ function loadTextFile(fileName) {
     const xhr = createXMLHttpRequest();
     if (xhr)
     {
-        xhr.open('GET', fileName);
+        xhr.open('GET', fileName, false);
         xhr.send(null);
     }
 }

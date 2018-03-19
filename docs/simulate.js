@@ -53,7 +53,7 @@ class SkillEffect {
 
     // 時刻に応じたコンボアップ倍率を返す
     comboUp(second) {
-        const effects = this.scoreUps.map(skill => skill.effect(second));
+        const effects = this.comboBonuses.map(skill => skill.effect(second));
         return Math.max.apply(null, effects) * 3 + 1;       // 発動しているスキルの中から最も効果の高いものを適用
     }
 }
