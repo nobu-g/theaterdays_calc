@@ -151,8 +151,7 @@ function calc() {
     }
 
     const musicName = $('#music select option:selected').val()
-    // loadTextFile('https://nobu-g.github.io/theaterdays_calc/' + musicName + '.bms');
-    loadTextFile('https://nobu-g.github.io/theaterdays_calc/自分REST@RT.bms');    // デバッグ用
+    loadTextFile('https://nobu-g.github.io/theaterdays_calc/bms/' + musicName + '.bms');
     document.getElementById('text1').innerText = bmsText;
     const musicData = parse(bmsText);
     simulate(musicData.notes, musicData.bpm, musicData.level);
