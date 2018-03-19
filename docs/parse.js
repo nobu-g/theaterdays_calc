@@ -47,7 +47,7 @@ function parse(bmsText) {
         }
     }
 
-    const availableChannels = new Array(11, 12, 13, 14, 15, 18, 19);
+    const availableChannels = [11, 12, 13, 14, 15, 18, 19];
     let processedMainData = new Array();
     for (const data of mainData) {
         const bar = parseInt(data.substring(0, 3));

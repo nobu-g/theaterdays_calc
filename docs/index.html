@@ -155,7 +155,7 @@ function calc() {
     loadTextFile('https://nobu-g.github.io/theaterdays_calc/自分REST@RT.bms');    // デバッグ用
     document.getElementById('text1').innerText = bmsText;
     const musicData = parse(bmsText);
-    simulate(musicData.notes, musicData.BPM, musicData.level);
+    simulate(musicData.notes, musicData.bpm, musicData.level);
 }
 
 

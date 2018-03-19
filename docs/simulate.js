@@ -1,20 +1,21 @@
-// スコアアップスキル
-class ScoreUp {
+// スコアアップ系スキル
+class Skill {
     constructor(id) {
         this.interval    = parseInt($('#' + id + ' input[name="interval"]'   ).val());
         this.probability = parseInt($('#' + id + ' input[name="probability"]').val()) / 100;
         this.duration    = parseInt($('#' + id + ' input[name="duration"]'   ).val());
         this.rate        = parseInt($('#' + id + ' input[name="rate"]'       ).val()) / 100;
     }
-}
 
-// コンボボーナススキル
-class ComboBonus {
-    constructor(id) {
-        this.interval    = parseInt($('#' + id + ' input[name="interval"]'   ).val());
-        this.probability = parseInt($('#' + id + ' input[name="probability"]').val()) / 100;
-        this.duration    = parseInt($('#' + id + ' input[name="duration"]'   ).val());
-        this.rate        = parseInt($('#' + id + ' input[name="rate"]'       ).val()) / 100;
+    // スキル効果による倍率を返す
+    effect(second) {
+        const mod = second - Math.floor(second / this.interval) * this.interval;
+        // スキル発動期間中なら倍率を返す
+        if (mod < this.duration) {
+            return this.rate + 1;
+        } else {
+            return 1.0;
+        }
     }
 }
 
@@ -31,10 +32,10 @@ class SkillEffect {
                 break;
             case 'score1':
             case 'score2':
-                this.scoreUps.push(new ScoreUp('skill' + i));
+                this.scoreUps.push(new Skill('skill' + i));
                 break;
             case 'combo':
-                this.comboBonuses.push(new ComboBonus('skill' + i));
+                this.comboBonuses.push(new Skill('skill' + i));
                 break;
             case 'other':
                 break;
@@ -42,7 +43,18 @@ class SkillEffect {
                 console.log('セレクトボックスのvalueが不正です。');
             }
         }
+    }
 
+    // 時刻に応じたスコアアップ倍率を返す
+    scoreUp(second) {
+        const effects = this.scoreUps.map(skill => skill.effect(second));
+        return Math.max.apply(null, effects);       // 発動しているスキルの中から最も効果の高いものを適用
+    }
+
+    // 時刻に応じたコンボアップ倍率を返す
+    comboUp(second) {
+        const effects = this.scoreUps.map(skill => skill.effect(second));
+        return Math.max.apply(null, effects);       // 発動しているスキルの中から最も効果の高いものを適用
     }
 }
 
@@ -55,6 +67,11 @@ function simulate(notes, bpm, level) {
             allNotes.push(note.next);
         }
     }
+    allNotes.sort(function(n1, n2) {
+        if (n1.beat < n2.beat) return -1;
+        if (n1.beat > n2.beat) return 1;
+        return 0;
+    });
 
     const notesNum = allNotes.length;       // 総ノーツ数(最大コンボ数と一致)
     let weightedNotesNum = 0;               // 重み付きノーツ数
@@ -80,8 +97,33 @@ function simulate(notes, bpm, level) {
 
     // スキル
     const skillEffect = new SkillEffect();
-    // 実際にシミュレーション
-    for (const note of notes) {
-        const second = note.beat / bpm * 60;
+
+    /* 実際にシミュレーション */
+
+    let score = 0;                  // これから計算するスコア
+    const sizeFactor = [1, 2, 10];  // ノーツ倍率
+    // まずは単ノーツのスコアを加算
+    for (let i = 0; i < allNotes.length; i++) {
+        const note = allNotes[i];               // エイリアス
+        const second = note.beat / bpm * 60;    // noteが判定される時間
+
+        const judgeFactor = 1.0;    // 常にPerfect判定を仮定
+        // 各種倍率を考慮してスコアを加算
+        score += s * sizeFactor[note.size] * judgeFactor * skillEffect.scoreUp(second)
+               + c * comboFactor(i + 1) * skillEffect.comboUp(second);
     }
+
+    alert(score);
+}
+
+// コンボ倍率を返す
+function comboFactor(combo) {
+    if      ( 1  <= combo && combo < 10 ) return 0.0;
+    else if ( 10 <= combo && combo < 30 ) return 1.0;
+    else if ( 30 <= combo && combo < 50 ) return 1.3;
+    else if ( 50 <= combo && combo < 70 ) return 1.6;
+    else if ( 70 <= combo && combo < 100) return 1.8;
+    else if (100 <= combo               ) return 2.0;
+
+    return 0;
 }

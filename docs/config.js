@@ -1,5 +1,5 @@
 // スキル情報を保持
-class Skill {
+class SkillData {
     constructor(id) {
         this.interval    = $('#' + id + ' input[name="interval"]'   ).val();
         this.probability = $('#' + id + ' input[name="probability"]').val();
@@ -12,11 +12,11 @@ class Skill {
 // 設定項目を保持
 class Config {
     constructor() {
-        this.skill1 = new Skill('skill1');
-        this.skill2 = new Skill('skill2');
-        this.skill3 = new Skill('skill3');
-        this.skill4 = new Skill('skill4');
-        this.skill5 = new Skill('skill5');
+        this.skill1 = new SkillData('skill1');
+        this.skill2 = new SkillData('skill2');
+        this.skill3 = new SkillData('skill3');
+        this.skill4 = new SkillData('skill4');
+        this.skill5 = new SkillData('skill5');
         this.appeal = $('#appeal input').val();
     }
 }
