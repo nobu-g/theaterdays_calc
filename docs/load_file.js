@@ -3,9 +3,8 @@ function loadTextFile(fileName) {
     const xhr = createXMLHttpRequest();
     if (xhr)
     {
-        xhr.open('GET', fileName, true);
+        xhr.open('GET', fileName);
         xhr.send(null);
-        xhr.abort();
     }
 }
 
