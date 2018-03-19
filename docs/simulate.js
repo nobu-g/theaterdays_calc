@@ -12,9 +12,9 @@ class Skill {
         const mod = second - Math.floor(second / this.interval) * this.interval;
         // スキル発動期間中なら倍率を返す
         if (mod < this.duration) {
-            return this.rate + 1;
+            return this.rate;
         } else {
-            return 1.0;
+            return 0;
         }
     }
 }
@@ -48,13 +48,13 @@ class SkillEffect {
     // 時刻に応じたスコアアップ倍率を返す
     scoreUp(second) {
         const effects = this.scoreUps.map(skill => skill.effect(second));
-        return Math.max.apply(null, effects);       // 発動しているスキルの中から最も効果の高いものを適用
+        return Math.max.apply(null, effects) + 1;           // 発動しているスキルの中から最も効果の高いものを適用
     }
 
     // 時刻に応じたコンボアップ倍率を返す
     comboUp(second) {
         const effects = this.scoreUps.map(skill => skill.effect(second));
-        return Math.max.apply(null, effects);       // 発動しているスキルの中から最も効果の高いものを適用
+        return Math.max.apply(null, effects) * 3 + 1;       // 発動しているスキルの中から最も効果の高いものを適用
     }
 }
 
@@ -111,6 +111,24 @@ function simulate(notes, bpm, level) {
         // 各種倍率を考慮してスコアを加算
         score += s * sizeFactor[note.size] * judgeFactor * skillEffect.scoreUp(second)
                + c * comboFactor(i + 1) * skillEffect.comboUp(second);
+    }
+    // 次にロングノーツのスコアを秒区切りで加算
+    for (const note of notes) {
+        if (note.next != 0) {
+            const startTime = note.beat / bpm * 60;
+            const endTime = note.next.beat / bpm * 60;
+            let ceilTime = Math.ceil(startTime);
+            if (ceilTime < endTime) {               // ロングノーツが秒をまたぐとき
+                score += (ceilTime - startTime) * 2 * s * skillEffect.scoreUp(startTime);
+                while (ceilTime + 1 < endTime) {
+                    score += 2 * s * skillEffect.scoreUp(ceilTime);
+                    ceilTime ++;
+                }
+                score += (endTime - ceilTime) * 2 * s * skillEffect.scoreUp(ceilTime);
+            } else {                            // 一つの秒区間の中に始点と終点があるとき
+                score += (endTime - startTime) * 2 * s * skillEffect.scoreUp(startTime);
+            }
+        }
     }
 
     alert(score);

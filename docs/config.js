@@ -17,6 +17,7 @@ class Config {
         this.skill3 = new SkillData('skill3');
         this.skill4 = new SkillData('skill4');
         this.skill5 = new SkillData('skill5');
+        this.music  = $('#music select option:selected').val();
         this.appeal = $('#appeal input').val();
     }
 }
@@ -44,6 +45,7 @@ function setConfig() {
         set(config.skill3, 'skill3');
         set(config.skill4, 'skill4');
         set(config.skill5, 'skill5');
+        $('#music select').val(config.music);
         $('#appeal input').val(config.appeal);
     }
 }
