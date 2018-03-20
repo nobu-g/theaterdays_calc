@@ -114,7 +114,7 @@ function calc(notes, bpm, level) {
 
     let scores = [];    // スコアを保存
     // 100回試行
-    for (let i = 0; i < 1; i++){
+    for (let i = 0; i < 100; i++){
 
         /* 実際にシミュレーション */
 
@@ -183,7 +183,7 @@ function analyze(scores) {
     }, 0) / (scores.length - 1);
 
 
-    $('#ave').val(average);
-    $('#var').val(variance);
+    $('#ave').text(Math.round(average));
+    $('#std_dev').text(Math.round(Math.sqrt(variance)));
     $('#result').show();
 }
