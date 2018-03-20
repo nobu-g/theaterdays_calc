@@ -3,22 +3,22 @@ html, body {
 }
 
 @media screen and (min-width: 480px) {
-h1, h5 {
-    margin: 0 auto;
-    width: 400px;
-}
+    h1, h5 {
+        margin: 0 auto;
+        width: 400px;
+    }
 
-form {
-    /* フォームをページの中央に置く */
-    margin: 0 auto;
-    width: 400px;
-}
+    form {
+        /* フォームをページの中央に置く */
+        margin: 0 auto;
+        width: 400px;
+    }
 }
 
 /* スマホ用設定 */
 @media screen and (max-width: 480px) {
     body {
-        font-size: 4.2vw;
+        font-size: 4vw;
     }
 
     h1, h5 {
@@ -31,6 +31,11 @@ form {
         margin: 0 auto;
         width: device-width;
     }
+}
+
+.vertical-align input,
+.vertical-align select {
+	vertical-align: middle;
 }
 
 #skill div {
