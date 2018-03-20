@@ -169,21 +169,53 @@ function comboFactor(combo) {
     return 0;
 }
 
+// analyze関数とrepeatedTrial関数の両方からアクセスするので大域に
+let average = 0;
+let standardDeviation = 0;
+
 function analyze(scores) {
 
     // for (const score of scores) { document.write(score + '<br>'); }
 
     // まず、scoresが正規分布からの標本であると仮定して、点推定
-    const average = scores.reduce( (pre, curr) => {
+    average = scores.reduce( (pre, curr) => {
         return pre + curr;
     }, 0) / scores.length;
 
     const variance = scores.reduce( (pre, curr) => {
         return pre + Math.pow(curr - average, 2);
     }, 0) / (scores.length - 1);
-
+    standardDeviation = Math.sqrt(variance);
 
     $('#ave').text(Math.round(average));
-    $('#std_dev').text(Math.round(Math.sqrt(variance)));
+    $('#std_dev').text(Math.round(standardDeviation));
     $('#result').show();
+}
+
+// 反復試行の確率を計算する
+function repeatedTryals() {
+    const targetScore = $('#target_score').val();   // 目標スコア
+    const n = $('#trials option:selected').val();   // 反復回数
+
+    const normalizedScore = (targetScore - average) / standardDeviation;    // 正規化
+    const p = 1 - cdf(normalizedScore);     //  1回の試行で目標スコアが出る確率
+    alert(1 - Math.pow(1 - p, n));
+}
+
+// 標準正規分布の累積分布関数
+function cdf(x) {
+
+    // 定数
+    const p  =  0.2316419;
+    const b1 =  0.31938153;
+    const b2 = -0.356563782;
+    const b3 =  1.781477937;
+    const b4 = -1.821255978;
+    const b5 =  1.330274429;
+
+    const t = 1 / (1 + p * Math.abs(x));
+    const Z = Math.exp(-x * x / 2) / Math.sqrt(2 * Math.PI);
+    const y = 1 - Z * ((((b5 * t + b4) * t + b3) * t + b2) * t + b1) * t;
+
+    return (x > 0) ? y : 1 - y;
 }

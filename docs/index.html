@@ -135,12 +135,12 @@
                 <span id="std_dev"></span>
             </p>
             <p>
-                <label for="aim">目標スコア:</label>
-                <input type="text" id="aim" />
+                <label for="target_score">目標スコア:</label>
+                <input type="text" id="target_score" onchange="repeatedTryals()" />
             </p>
             <p>
                 <label for="trials">試行回数:</label>
-                <select name="target" id="trials">
+                <select name="trials" id="trials" onchange="repeatedTryals()">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>

@@ -32,10 +32,13 @@ form {
     padding-bottom: 1px;
     margin: 5px;
 }
+
 select {
     height: 1.6em;
     padding-top: 1px;
     padding-bottom: 1px;
+}
+#skill select {
     margin: 5px;
 }
 
