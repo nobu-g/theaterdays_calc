@@ -33,10 +33,10 @@ html, body {
     }
 }
 
-.vertical-align input,
+/* .vertical-align input,
 .vertical-align select {
 	vertical-align: middle;
-}
+} */
 
 #skill div {
     /* フォームの範囲がわかるようにする */
@@ -51,12 +51,14 @@ html, body {
     padding: auto;
     margin: .3em;
     font-size: 80%;
+    vertical-align: middle;
 }
 
 select {
     height: 1.6em;
     padding: auto;
     font-size: 80%;
+    vertical-align: middle;
 }
 #skill select {
     margin: .3em;
@@ -67,6 +69,7 @@ select {
     height: 1em;
     padding auto;
     margin: .5em;
+    vertical-align: middle;
 }
 
 form div + div {
