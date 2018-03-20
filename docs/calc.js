@@ -114,7 +114,7 @@ function calc(notes, bpm, level) {
 
     let scores = [];    // スコアを保存
     // 100回試行
-    for (let i = 0; i < 100; i++){
+    for (let i = 0; i < 500; i++){
 
         /* 実際にシミュレーション */
 
@@ -155,6 +155,7 @@ function calc(notes, bpm, level) {
     }
 
     analyze(scores);    // 結果を統計的に分析
+    repeatedTryals();   // 2回目以降の計算で反復試行結果を更新するために呼ぶ
 }
 
 // コンボ倍率を返す
@@ -197,9 +198,12 @@ function repeatedTryals() {
     const targetScore = $('#target_score').val();   // 目標スコア
     const n = $('#trials option:selected').val();   // 反復回数
 
-    const normalizedScore = (targetScore - average) / standardDeviation;    // 正規化
-    const p = 1 - cdf(normalizedScore);     //  1回の試行で目標スコアが出る確率
-    alert(1 - Math.pow(1 - p, n));
+    if (targetScore > 0) {
+        const normalizedScore = (targetScore - average) / standardDeviation;    // 正規化
+        const p = 1 - cdf(normalizedScore);             //  1回の試行で目標スコアが出る確率
+        const pRepeated = 1 - Math.pow(1 - p, n);       // n回の試行で目標スコアが出る確率
+        alert(n + '回のプレイで、' + targetScore + '点が出る確率は' + (pRepeated*100).toPrecision(2) + '%です。');
+    }
 }
 
 // 標準正規分布の累積分布関数

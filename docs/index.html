@@ -12,9 +12,9 @@
     <h1>
         ミリシタスコア計算機
     </h1>
-    <h2>
-
-    </h2>
+    <h4>
+        全てPerfectだった時のスコアをシミュレートします。LP上げの目安にお使いください。
+    </h4>
     <form id="form">
         <div id="skill">
             <div id="skill1">
@@ -199,17 +199,6 @@ function load() {
     const musicName = $('#music select option:selected').val()
     loadTextFile('https://nobu-g.github.io/theaterdays_calc/bms/' + musicName + '.bms');
 }
-
-// var scroll_top = 0;
-//
-// $('form').submit(function(){
-//   sessionStorage.setItem('scroll', $(window).scrollTop());  // 送信時の位置情報を取得&保存
-// });
-
-// window.onload = function(){
-//   //ロード時に隠しフィールドから取得した値で位置をスクロール
-//   $(window).scrollTop(parseInt(sessionStorage.getItem('scroll')));
-// }
 
 
 $('#submitBtn').click(function(e) {
