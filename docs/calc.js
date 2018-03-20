@@ -113,8 +113,8 @@ function calc(notes, bpm, level) {
     const c = basicScore * 0.3 / (2 * notesNum - 66);       // コンボボーナス基本値
 
     let scores = [];    // スコアを保存
-    // 100回試行
-    for (let i = 0; i < 500; i++){
+    // 500回試行
+    for (let i = 0; i < 500; i++) {
 
         /* 実際にシミュレーション */
 
