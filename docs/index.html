@@ -121,11 +121,17 @@
         </div>
 
         <div class="button">
-            <input type="submit" value="計算" onClick="load()">
+            <input type="submit" id="submitBtn" value="計算" onClick="load()">
+        </div>
+
+
+        <div id="result">
+            <p>平均スコア: <span id="ave"></span></p><br>
+            <p>分散: <span id="var"></span></p>
+            <label for="aim">目標スコア:</label>
+            <input type="text" id="aim" />
         </div>
     </form>
-
-    <div id="text1"></div>
 
 
 
@@ -140,23 +146,46 @@
 // ページ読み込み時に保存されていたデータを展開
 $(document).ready(function(){
     setConfig();
+    $('#result').hide();    // 結果は計算するまで隠しておく
 });
+
+// フォーム入力の内容に誤りがないか調べる
+function formCheck() {
+    for (const element of document.getElementsByTagName('form')[0]) {
+        if (element.validity.valid == false) { return false; }
+    }
+
+    return true;
+}
 
 // 譜面データをロード
 function load() {
     storeConfig();    // 入力データを保存
 
     // エラーチェック
-    for (const element of document.getElementsByTagName('form')[0]) {
-        if (element.validity.valid == false) { return; }
-    }
+    if (formCheck() == false) { return; }
 
     const musicName = $('#music select option:selected').val()
     loadTextFile('https://nobu-g.github.io/theaterdays_calc/bms/' + musicName + '.bms');
 }
 
+// var scroll_top = 0;
+//
+// $('form').submit(function(){
+//   sessionStorage.setItem('scroll', $(window).scrollTop());  // 送信時の位置情報を取得&保存
+// });
+
+// window.onload = function(){
+//   //ロード時に隠しフィールドから取得した値で位置をスクロール
+//   $(window).scrollTop(parseInt(sessionStorage.getItem('scroll')));
+// }
 
 
+$('#submitBtn').click(function(e) {
+    if (formCheck()){
+        return e.preventDefault();
+    }
+});
 
 </script>
 

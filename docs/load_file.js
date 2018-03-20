@@ -29,25 +29,25 @@ function createXMLHttpRequest() {
             switch ( xhr.readyState ) {
             case 0:
                 // 未初期化状態.
-                document.getElementById('text1').innerText = 'uninitialized!';
+                console.log('uninitialized!');
                 break;
             case 1: // データ送信中.
-                document.getElementById('text1').innerText = 'loading...';
+                console.log('loading...');
                 break;
             case 2: // 応答待ち.
-                document.getElementById('text1').innerText = 'loaded.';
+                console.log('loaded.');
                 break;
             case 3: // データ受信中.
-                document.getElementById('text1').innerText = 'interactive... ' + xhr.responseText.length + ' bytes.';
+                console.log('interactive... ' + xhr.responseText.length + ' bytes.');
                 break;
             case 4: // データ受信完了.
                 if( xhr.status == 200 || xhr.status == 304 ) {
-                    const bmsText = xhr.responseText; // responseXML もあり
+                    const bmsText = xhr.responseText;
                     const musicData = window.parse(bmsText);
                     window.calc(musicData.notes, musicData.bpm, musicData.level);
                     console.log('COMPLETE!');
                 } else {
-                    document.getElementById('text1').innerText = 'Failed. HttpStatus: ' + xhr.statusText;
+                    console.log('Failed. HttpStatus: ' + xhr.statusText);
                 }
                 break;
             }

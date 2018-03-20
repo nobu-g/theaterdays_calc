@@ -114,7 +114,7 @@ function calc(notes, bpm, level) {
 
     let scores = [];    // スコアを保存
     // 100回試行
-    for (let i = 0; i < 100; i++){
+    for (let i = 0; i < 1; i++){
 
         /* 実際にシミュレーション */
 
@@ -170,7 +170,20 @@ function comboFactor(combo) {
 }
 
 function analyze(scores) {
-    for (const score of scores) {
-        document.write(score + '<br>');
-    }
+
+    // for (const score of scores) { document.write(score + '<br>'); }
+
+    // まず、scoresが正規分布からの標本であると仮定して、点推定
+    const average = scores.reduce( (pre, curr) => {
+        return pre + curr;
+    }, 0) / scores.length;
+
+    const variance = scores.reduce( (pre, curr) => {
+        return pre + Math.pow(curr - average, 2);
+    }, 0) / (scores.length - 1);
+
+
+    $('#ave').val(average);
+    $('#var').val(variance);
+    $('#result').show();
 }
